@@ -1,0 +1,114 @@
+:root {
+  --orange: #ffbd33;
+  --blue-sky: #1a78ac;
+  --gutter: 30px;
+  --hover: #ff5733;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--blue-sky);
+  font-size: 16px;
+}
+
+.container {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  justify-content: center;
+  margin: 0 auto;
+  max-width: 1150px;
+}
+@media only screen and (min-width: 768px) {
+  .container {
+    flex-direction: row;
+  }
+}
+
+ul {
+  display: flex;
+  flex-direction: column;
+  font-size: 1.6em;
+  margin: 0;
+  padding: 0;
+}
+@media only screen and (min-width: 768px) {
+  ul {
+    font-size: 2.6em;
+  }
+}
+
+li {
+  margin: 10px 0;
+  text-align: center;
+}
+
+a {
+  display: inline-block;
+  text-decoration: none;
+  transition: all .2s ease-in-out;
+}
+
+a, a:visited, a:active {
+  color: var(--orange);
+}
+
+a:hover {
+  color: var(--hover);
+  transform: scale3d(1.2, 1.2, 1);
+}
+
+@media only screen and (min-width: 768px) {
+}
+
+/* SVG - Logo */
+
+#Logo {
+  animation: upAndDown 2s infinite;
+  animation-direction: alternate;
+  animation-timing-function: ease-in-out;
+  margin-bottom: var(--gutter);
+  position: relative;
+}
+@media only screen and (min-width: 768px) {
+  #Logo {
+    height: 350px;
+    margin-bottom: 0;
+    margin-right: 30px;
+    width: 350px;
+  }
+}
+
+#Pikes {
+  animation: scaleInAndOut 2s infinite;
+  animation-direction: alternate;
+  animation-timing-function: linear;
+  transform-origin: center;
+}
+
+#Pikes, #Circle {
+  fill: var(--orange);
+}
+
+#Mustache, #MonocleBody {
+  fill: #000;
+}
+
+#MonocleInner {
+  fill: #aaa9d3;
+}
+
+/* animations */
+
+@keyframes upAndDown {
+  100% { transform: translate3d(0, -10px, 0) }
+}
+
+@keyframes scaleInAndOut {
+  100% { transform: scale3d(1.1, 1.1, 1) }
+}
+
