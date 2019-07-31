@@ -5,6 +5,8 @@
   --gutter-mobile: 20px;
   --hover: #ff5733;
   --animation-time: 1.2s;
+  --shadow-color: #0003;
+  --shadow-fade: #00000030;
 }
 
 * {
@@ -94,18 +96,42 @@ body {
 
 /* SVG - Logo */
 
+.logo-wrapper {
+  position: relative;
+  margin-bottom: var(--gutter-mobile);
+}
+@media only screen and (min-width: 768px) {
+  .logo-wrapper {
+    margin-right: 30px;
+  }
+}
+
+/* logo shadow */
+.logo-wrapper::before {
+  content: "";
+  height: 20px;
+  width: 100%;
+  box-shadow: 0px 0px 8px 10px var(--shadow-color);
+  position: absolute;
+  bottom: -4px;
+  border-radius: 50%;
+  background-color: var(--shadow-color);
+  transform: scale3d(.6, .8, 1);
+  animation: shrinkShadow var(--animation-time) infinite;
+  animation-direction: alternate;
+  animation-timing-function: ease-in-out;
+}
+
 #Logo {
   animation: upAndDown var(--animation-time) infinite;
   animation-direction: alternate;
   animation-timing-function: ease-in-out;
-  margin-bottom: var(--gutter-mobile);
   position: relative;
 }
 @media only screen and (min-width: 768px) {
   #Logo {
     height: 350px;
     margin-bottom: 0;
-    margin-right: 30px;
     width: 350px;
   }
 }
@@ -139,3 +165,10 @@ body {
   100% { transform: scale3d(1.1, 1.1, 1) }
 }
 
+@keyframes shrinkShadow {
+  100% {
+    transform: scale3d(.5, .8, .1);
+    background-color: var(--shadow-fade);
+    box-shadow: 0px 0px 11px 10px var(--shadow-fade);
+  }
+}
