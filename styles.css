@@ -18,11 +18,109 @@ body {
   font-size: 16px;
 }
 
-#root {
-  height: 100vh;
-  display: flex;
-  align-items: center;
+/* pages begin */
+
+.page {
+    height: 100vh;
 }
+
+/* video page */
+.video-page .responsive-iframe {
+    margin-bottom: var(--gutter);
+}
+@media only screen and (min-width: 768px) {
+    .video-page .responsive-iframe {
+        margin-bottom: 0;
+    }
+}
+
+/* pages end */
+
+.flex-container {
+    height: 100%;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    justify-content: center;
+}
+@media only screen and (min-width: 768px) {
+    .flex-container {
+        flex-direction: row;
+    }
+}
+
+.responsive-iframe {
+    height: 56vw;
+    width: 100vw;
+    max-width: 520px;
+    max-height: 292px;
+}
+@media only screen and (min-width: 768px) {
+    .responsive-iframe {
+        height: 30.6vw;
+    }
+}
+
+.youtube-embed {
+    position: relative;
+    width: 100%;
+    height: 0;
+    padding-bottom: 56%;
+}
+
+/* iframe */
+.youtube-embed iframe {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+}
+
+.button-wrapper {
+    position: fixed;
+    bottom: var(--gutter);
+    right: var(--gutter);
+    transition: all .6s;
+}
+.button-wrapper:hover {
+    transform: scale3d(1.1, 1.1, 1);
+}
+
+.next-page-button {
+    --radius: 60px;
+    width: var(--radius);
+    height: var(--radius);
+    border-radius: 50%;
+    border-style: none;
+    box-shadow: 0px 0px 2px 4px white;
+    background: #402F0D;
+    transition: all .6s;
+}
+.next-page-button.socials-active {
+    transform: rotate3d(0, 0, 1, 180deg);
+}
+.next-page-button:focus {
+    outline: 0;
+}
+
+.arrow-down {
+    --border-width: 8px;
+    --color: white;
+    --dimensions: 30px;
+    display: block;
+    height: var(--dimensions);
+    width: var(--dimensions);
+    border-right: var(--border-width) solid var(--color);
+    border-bottom: var(--border-width) solid var(--color);
+    transform: rotate3d(0, 0, 1, 45deg);
+    position: absolute;
+    top: 10px;
+    left: 15px;
+
+}
+
+/* refactor down here below */
 
 .app {
   align-items: center;
@@ -30,11 +128,14 @@ body {
   flex-direction: column;
   justify-content: center;
   margin: 0 auto;
+  width: 100%;
+  height: 100%;
   max-width: 1150px;
 }
 @media only screen and (min-width: 768px) {
   .app {
     flex-direction: row;
+    flex-wrap: wrap;
   }
 }
 
@@ -98,12 +199,6 @@ body {
 
 .logo-wrapper {
   position: relative;
-  margin-bottom: var(--gutter-mobile);
-}
-@media only screen and (min-width: 768px) {
-  .logo-wrapper {
-    margin-right: 30px;
-  }
 }
 
 /* logo shadow */

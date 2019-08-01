@@ -9,7 +9,7 @@
         <link rel="stylesheet" href="./styles.css">
         <title>Don Nikasol</title>
     </head>
-    <body>
+    <body scroll="no" style="overflow: hidden">
         <div id="root"></div>
 
         <script crossorigin src="https://unpkg.com/react@16/umd/react.production.min.js"></script>
@@ -50,6 +50,19 @@
                 },
             ];
 
+            const YoutubeEmbed = () => (
+                <div className="youtube-embed">
+                    <iframe
+                        width="560"
+                        height="315"
+                        src="https://www.youtube.com/embed/S2vU1lXIndk"
+                        frameborder="0"
+                        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen
+                    />
+                </div>
+            );
+
             const Link = ({ src, name }, idx) => (
                 <li className="social">
                     <div className="icon-wrapper">
@@ -73,12 +86,69 @@
                 </ul>
             );
 
+            const Page = ({ children, className }) => (
+                <div className={`page ${className}`}>
+                    {children}
+                </div>
+            );
+
+            const ResponsiveIframe = ({ children }) => (
+                <div className="responsive-iframe">{children}</div>
+            );
+
+            const NextPageButton = () => (
+                <div className="button-wrapper">
+                    <button
+                        type="button"
+                        className="next-page-button"
+                        onClick={(() => {
+                            let toggle = true;
+                            let pages;
+                            let button;
+
+                            return () => {
+                                if (!pages || !button) {
+                                    console.info('Setting pages (and Button) : [NextPageButton]');
+                                    pages = [...document.querySelectorAll('.page')];
+                                    button = document.querySelector('.next-page-button');
+                                }
+
+                                const [videoPage, socialsPage] = pages;
+
+                                (toggle ? socialsPage : videoPage)['scrollIntoView']({
+                                    behavior: 'smooth'
+                                });
+
+                                button.classList[toggle ? 'add' : 'remove']('socials-active');
+
+                                toggle = !toggle;
+                            };
+                        })()}
+                    >
+                        <i className="arrow-down" />
+                    </button>
+                </div>
+            );
+
             const App = () => {
                 return (
-                    <div className="app">
-                        <Logo />
-                        <SocialList />
-                    </div>
+                <React.Fragment>
+                    <Page className="video-page">
+                        <div className="flex-container">
+                            <ResponsiveIframe>
+                                <YoutubeEmbed />
+                            </ResponsiveIframe>
+                            <Logo />
+                        </div>
+                    </Page>
+                    <Page className="socials-page">
+                        <div className="app">
+                            <Logo />
+                            <SocialList />
+                        </div>
+                    </Page>
+                    <NextPageButton />
+                </React.Fragment>
                 );
             }
 
