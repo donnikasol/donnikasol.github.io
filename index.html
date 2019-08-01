@@ -9,7 +9,7 @@
         <link rel="stylesheet" href="./styles.css">
         <title>Don Nikasol</title>
     </head>
-    <body scroll="no" style="overflow: hidden">
+    <body>
         <div id="root"></div>
 
         <script crossorigin src="https://unpkg.com/react@16/umd/react.production.min.js"></script>
@@ -131,6 +131,50 @@
             );
 
             const App = () => {
+                const [pageYOffset, setPageYOffset] = React.useState(0);
+
+                console.log(pageYOffset);
+
+                const addWheelEvent = (node, callback = () => {}) => {
+                    console.log('-- initializing wheel');
+                    node.addEventListener('wheel', () => {
+                        const currentPageYOffset = window.pageYOffset;
+
+                        if (currentPageYOffset > pageYOffset) {
+                            callback('down');
+                        } else {
+                            callback('up');
+                        }
+
+                        setPageYOffset(currentPageYOffset);
+                    });
+                };
+
+                const addScrollEvent = node => {
+                    console.log('-- initializing scroll');
+                    node.addEventListener('scroll', () => {
+                        console.log('scrolling...');
+                    });
+                };
+
+                const addTouchEvent = node => {
+                    console.log('-- initializing touch');
+                    node.addEventListener('touch', () => {
+                        console.log('touching...');
+                    });
+                };
+
+                React.useEffect(() => {
+                    const node = document.body;
+                    const [videoPage, socialsPage] = [...document.querySelectorAll('.page')];
+
+                    console.log('app did mount');
+
+                    addWheelEvent(node);
+                    addTouchEvent(node);
+                    addScrollEvent(node);
+                }, []);
+
                 return (
                 <React.Fragment>
                     <Page className="video-page">
@@ -150,7 +194,7 @@
                     <NextPageButton />
                 </React.Fragment>
                 );
-            }
+            };
 
             ReactDOM.render(<App />, document.querySelector('#root'));
         </script>
