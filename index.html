@@ -50,12 +50,12 @@
                 },
             ];
 
-            const YoutubeEmbed = () => (
+            const YoutubeEmbed = ({ src }) => (
                 <div className="youtube-embed">
                     <iframe
                         width="560"
                         height="315"
-                        src="https://www.youtube.com/embed/S2vU1lXIndk"
+                        src={src}
                         frameborder="0"
                         allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
                         allowfullscreen
@@ -136,7 +136,7 @@
                     <Page className="video-page">
                         <div className="flex-container">
                             <ResponsiveIframe>
-                                <YoutubeEmbed />
+                                <YoutubeEmbed src="https://www.youtube.com/embed/DQvhg-wC9EI" />
                             </ResponsiveIframe>
                             <Logo />
                         </div>
